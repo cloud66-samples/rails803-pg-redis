@@ -1,0 +1,52 @@
+<div class="flower-details-page">
+  <div class="title-container">
+    <h1>Flower Details 🌸</h1>
+  </div>
+
+  <div class="flower-card">
+    <div class="flower-color">
+      <span class="color-dot large" style="background-color: <%= @flower.color.downcase %>;"></span>
+      <h2><%= @flower.color %> Flower</h2>
+    </div>
+    
+    <div class="flower-illustration">
+      <svg viewBox="-100 -100 200 200" width="200" height="200">
+        <!-- Center circle -->
+        <circle cx="0" cy="0" r="20" fill="yellow"/>
+        
+        <!-- Generate petals based on number_of_petals -->
+        <% @flower.number_of_petals.times do |i| %>
+          <% angle = (i * 360.0 / @flower.number_of_petals) %>
+          <% 
+            # Calculate petal endpoints using trigonometry
+            x1 = 60 * Math.cos(angle * Math::PI / 180)
+            y1 = 60 * Math.sin(angle * Math::PI / 180)
+            
+            # Control points for the bezier curve
+            cx1 = 30 * Math.cos((angle - 30) * Math::PI / 180)
+            cy1 = 30 * Math.sin((angle - 30) * Math::PI / 180)
+            cx2 = 30 * Math.cos((angle + 30) * Math::PI / 180)
+            cy2 = 30 * Math.sin((angle + 30) * Math::PI / 180)
+          %>
+          <path
+            d="M 0,0 
+               Q <%= cx1 %>,<%= cy1 %> <%= x1 %>,<%= y1 %>
+               Q <%= cx2 %>,<%= cy2 %> 0,0"
+            fill="<%= @flower.color.downcase %>"
+            opacity="0.8"
+            stroke="black"
+            stroke-width="1"
+          />
+        <% end %>
+      </svg>
+    </div>
+
+    <div class="flower-info">
+      <p><strong>ID:</strong> #<%= @flower.id %></p>
+      <p><strong>Number of Petals:</strong> <%= @flower.number_of_petals %></p>
+      <p><strong>Created:</strong> <%= @flower.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+    </div>
+
+    <%= link_to "← Back to Garden", root_path, class: "back-button" %>
+  </div>
+</div> 

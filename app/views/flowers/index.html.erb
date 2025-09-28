@@ -1,0 +1,47 @@
+<div>
+YJIT: <%= RubyVM::YJIT.enabled? %><br>
+CUSTOM_WEB_SOCKET_FILE: <%= ENV["CUSTOM_WEB_SOCKET_FILE"] %><br>
+</div>
+
+<div class="flowers-page">
+  <div class="title-container">
+    <h1>
+      My Garden 🌸
+      <span class="cache-indicator <%= @cache_status ? 'live' : 'cached' %>">
+        <%= @cache_status ? 'live 🔴' : 'cached ⚡️' %>
+      </span>
+    </h1>
+  </div>
+
+  <% flash.each do |type, message| %>
+    <div class="flash flash-<%= type %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <%= button_to "Sprout Random Flower! 🌸", flowers_path, method: :post, class: "sprout-button" %>
+
+  <table class="flowers-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Color</th>
+        <th>Number of Petals</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @flowers.each do |flower| %>
+        <tr class="flower-row" data-href="<%= flower_path(flower) %>">
+          <td>#<%= flower.id %></td>
+          <td>
+            <span class="color-dot" style="background-color: <%= flower.color.downcase %>;"></span>
+            <%= flower.color %>
+          </td>
+          <td><%= flower.number_of_petals %></td>
+          <td><%= flower.created_at.strftime("%B %d, %Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> 
