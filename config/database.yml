@@ -58,3 +58,15 @@ staging:
 production:
   primary: &primary_production
     <<: *default
+  cache:
+    <<: *primary_production
+    database: "<%= ENV['POSTGRESQL_DATABASE'] %>_cache"
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: "<%= ENV['POSTGRESQL_DATABASE'] %>_queue"
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: "<%= ENV['POSTGRESQL_DATABASE'] %>_cable"
+    migrations_paths: db/cable_migrate
