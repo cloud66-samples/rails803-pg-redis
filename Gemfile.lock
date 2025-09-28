@@ -189,6 +189,11 @@ GEM
     parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.2)
+    pg (1.6.2-aarch64-linux)
+    pg (1.6.2-arm64-darwin)
+    pg (1.6.2-x86_64-darwin)
+    pg (1.6.2-x86_64-linux)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -326,7 +331,6 @@ GEM
     thruster (0.1.15-x86_64-darwin)
     thruster (0.1.15-x86_64-linux)
     timeout (0.4.3)
-    trilogy (2.9.0)
     tsort (0.2.0)
     turbo-rails (2.0.17)
       actionpack (>= 7.1.0)
@@ -368,6 +372,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  pg (~> 1.1)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.3)
@@ -379,7 +384,6 @@ DEPENDENCIES
   solid_queue
   stimulus-rails
   thruster
-  trilogy
   turbo-rails
   tzinfo-data
   web-console

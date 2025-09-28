@@ -94,20 +94,20 @@ builder:
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
 #   db:
-#     image: mysql:8.0
+#     image: postgres:16
 #     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
+#     # Change to 5432 to expose port to the world instead of just local network.
+#     port: "127.0.0.1:5432:5432"
 #     env:
 #       clear:
-#         MYSQL_ROOT_HOST: '%'
+#         POSTGRES_DB: rails800_production
 #       secret:
-#         - MYSQL_ROOT_PASSWORD
+#         - POSTGRES_PASSWORD
 #     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
+#       - config/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
 #       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
 #     directories:
-#       - data:/var/lib/mysql
+#       - data:/var/lib/postgresql/data
 #   redis:
 #     image: redis:7.0
 #     host: 192.168.0.2

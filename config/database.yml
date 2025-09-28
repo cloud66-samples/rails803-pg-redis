@@ -1,35 +1,39 @@
-# MySQL. Versions 5.5.8 and up are supported.
+# PostgreSQL. Versions 9.3 and up are supported.
 #
-# Install the MySQL driver
-#   gem install mysql2
+# Install the pg driver:
+#   gem install pg
+# On macOS with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On macOS with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
 #
-# Ensure the MySQL gem is defined in your Gemfile
-#   gem "mysql2"
-#
-# And be sure to use new-style password hashing:
-#   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
+# Configure Using Gemfile
+# gem "pg"
 #
 default: &default
-  adapter: trilogy
-  encoding: utf8mb4
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
+  username: "<%= ENV['POSTGRESQL_USERNAME'] %>"
+  password: "<%= ENV['POSTGRESQL_PASSWORD'] %>"
+  host: "<%= ENV['POSTGRESQL_ADDRESS'] %>"
+  database: "<%= ENV['POSTGRESQL_DATABASE'] %>"
 
 development:
   <<: *default
-  database: rails800_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails800_test
 
 staging:
   <<: *default
-  database: rails800_staging
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -38,7 +42,7 @@ staging:
 # Instead, provide the password or a full connection URL as an environment
 # variable when you boot the app. For example:
 #
-#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
+#   DATABASE_URL="postgresql://myuser:mypass@localhost/somedatabase"
 #
 # If the connection URL is provided in the special DATABASE_URL environment
 # variable, Rails will automatically merge its configuration values on top of
@@ -54,16 +58,3 @@ staging:
 production:
   primary: &primary_production
     <<: *default
-    database: rails800_production
-  cache:
-    <<: *primary_production
-    database: rails800_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: rails800_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: rails800_production_cable
-    migrations_paths: db/cable_migrate

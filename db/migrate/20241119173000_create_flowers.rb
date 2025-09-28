@@ -1,4 +1,4 @@
-class CreateFlowers < ActiveRecord::Migration[7.0]
+class CreateFlowers < ActiveRecord::Migration[8.0]
   def change
     create_table :flowers do |t|
       t.string :color

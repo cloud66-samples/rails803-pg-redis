@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install --no-install-recommends -y \
         ca-certificates \
         curl \
-        default-mysql-client \
+        postgresql-client \
         dumb-init \
         libjemalloc2 \
         libvips \
@@ -55,7 +55,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update -qq && \
     apt-get install --no-install-recommends -y \
         build-essential \
-        default-libmysqlclient-dev \
+        libpq-dev \
         git \
         libyaml-dev \
         pkg-config && \
@@ -137,8 +137,8 @@ EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
 
 # Add metadata labels following OCI standards
-LABEL org.opencontainers.image.title="Rails 8.0 Trilogy Application" \
-      org.opencontainers.image.description="Modern Rails 8.0 application with Trilogy MySQL adapter" \
+LABEL org.opencontainers.image.title="Rails 8.0 PostgreSQL Application" \
+      org.opencontainers.image.description="Modern Rails 8.0 application with PostgreSQL adapter" \
       org.opencontainers.image.vendor="Rails Community" \
       org.opencontainers.image.version="8.0.0" \
       org.opencontainers.image.source="https://github.com/rails/rails" \
